@@ -305,7 +305,39 @@ document.addEventListener('DOMContentLoaded', function() {
       behavior: 'smooth'
     });
   });
+  
+  // Initialize the progress ring on DOM ready
+  setupProgressRing();
 });
+
+// Setup Progress Ring - NEW FUNCTION
+function setupProgressRing() {
+  const circle = document.querySelector('.progress-ring__circle');
+  const progressRing = document.querySelector('.progress-ring');
+  
+  if (!circle || !progressRing) return;
+  
+  // Get the current container dimensions
+  const width = progressRing.clientWidth;
+  const height = progressRing.clientHeight;
+  
+  // Calculate center point and radius
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const strokeWidth = 12; // Default stroke width
+  const radius = Math.min(centerX, centerY) - (strokeWidth / 2);
+  
+  // Set initial attributes for the circle
+  circle.setAttribute('r', radius);
+  circle.setAttribute('cx', centerX);
+  circle.setAttribute('cy', centerY);
+  circle.setAttribute('stroke-width', strokeWidth);
+  
+  // Calculate and set the initial stroke-dasharray
+  const circumference = 2 * Math.PI * radius;
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  circle.style.strokeDashoffset = circumference; // Start with full offset (no progress)
+}
 
 // Background Music Functionality
 function initBackgroundMusic() {
@@ -346,24 +378,20 @@ function initBackgroundMusic() {
     audio.addEventListener('timeupdate', updateProgress);
   }
 
-  // Update progress ring
+  // Update progress ring - UPDATED FOR RESPONSIVENESS
   function updateProgress() {
     const circle = document.querySelector('.progress-ring__circle');
-    let radius, circumference;
+    if (!circle) return;
     
-    // Get the radius based on window size
-    if (window.innerWidth <= 900) {
-      radius = 70;
-    } else if (window.innerWidth <= 1024) {
-      radius = 155;
-    } else {
-      radius = 185;
-    }
+    // Get the radius from the SVG element
+    const radius = parseFloat(circle.getAttribute('r'));
+    const circumference = 2 * Math.PI * radius;
     
-    circumference = 2 * Math.PI * radius;
-    
+    // Calculate the current progress offset
     const percent = audio.currentTime / audio.duration;
     const offset = isNaN(percent) ? circumference : circumference - percent * circumference;
+    
+    // Update the stroke-dashoffset to show progress
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = offset;
   }
@@ -447,7 +475,10 @@ function initBackgroundMusic() {
   initPlayer();
 
   // Handle window resize to update progress ring
-  window.addEventListener('resize', updateProgress);
+  window.addEventListener('resize', function() {
+    setupProgressRing();
+    updateProgress();
+  });
 }
 
 // Speech Bubble Animation
