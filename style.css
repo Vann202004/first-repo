@@ -1443,10 +1443,8 @@ footer{
         height: 320px;
     }
     
+    /* Progress ring circle styles */
     .progress-ring__circle {
-        r: 155;
-        cx: 160;
-        cy: 160;
         stroke-dasharray: 973.9; /* 2 * π * 155 */
         stroke-dashoffset: 973.9;
     }
@@ -1539,10 +1537,8 @@ footer{
         height: 220px;
     }
     
+    /* Progress ring circle styles */
     .progress-ring__circle {
-        r: 105;
-        cx: 110;
-        cy: 110;
         stroke-width: 8;
         stroke-dasharray: 659.7; /* 2 * π * 105 */
         stroke-dashoffset: 659.7;
@@ -1639,10 +1635,8 @@ footer{
         height: 150px;
     }
     
+    /* Progress ring circle styles */
     .progress-ring__circle {
-        r: 70;
-        cx: 75;
-        cy: 75;
         stroke-width: 5;
         stroke-dasharray: 439.8; /* 2 * π * 70 */
         stroke-dashoffset: 439.8;
