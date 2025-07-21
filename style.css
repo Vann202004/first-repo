@@ -622,8 +622,6 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     transform: rotate(-90deg);
 }
 
@@ -1440,6 +1438,19 @@ footer{
         height: 320px;
     }
     
+    .progress-ring {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .progress-ring__circle {
+        r: 155;
+        cx: 160;
+        cy: 160;
+        stroke-dasharray: 973.9; /* 2 * π * 155 */
+        stroke-dashoffset: 973.9;
+    }
+    
     .right-nav-controls {
         gap: 10px;
     }
@@ -1519,8 +1530,22 @@ footer{
     }
     
     .circular-player {
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 220px;
+    }
+    
+    .progress-ring {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .progress-ring__circle {
+        r: 105;
+        cx: 110;
+        cy: 110;
+        stroke-width: 8;
+        stroke-dasharray: 659.7; /* 2 * π * 105 */
+        stroke-dashoffset: 659.7;
     }
     
     .music-control-btn {
@@ -1602,6 +1627,25 @@ footer{
     }
     .gallery-container {
         grid-template-columns: 1fr;
+    }
+    
+    .circular-player {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-ring {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-ring__circle {
+        r: 70;
+        cx: 75;
+        cy: 75;
+        stroke-width: 5;
+        stroke-dasharray: 439.8; /* 2 * π * 70 */
+        stroke-dashoffset: 439.8;
     }
     
     .lightbox-prev, .lightbox-next {
