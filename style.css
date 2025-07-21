@@ -611,24 +611,26 @@ body{
     font-size: 20px;
 }
 
-/* Progress Ring */
+/* Progress Ring - UPDATED FOR RESPONSIVENESS */
 .circular-player {
     position: relative;
     width: 380px;
     height: 380px;
+    margin: 0 auto;
 }
 
 .progress-ring {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     transform: rotate(-90deg);
 }
 
 .progress-ring__circle {
     transition: stroke-dashoffset 0.3s;
-    stroke-dasharray: 1162.4;  /* 2 * π * radius (185) */
-    stroke-dashoffset: 1162.4; /* Start with full offset (no progress) */
+    /* Initial values will be set by JavaScript */
 }
 
 .image-container {
@@ -1443,12 +1445,6 @@ footer{
         height: 320px;
     }
     
-    /* Progress ring circle styles */
-    .progress-ring__circle {
-        stroke-dasharray: 973.9; /* 2 * π * 155 */
-        stroke-dashoffset: 973.9;
-    }
-    
     .right-nav-controls {
         gap: 10px;
     }
@@ -1535,13 +1531,6 @@ footer{
     .progress-ring {
         width: 220px;
         height: 220px;
-    }
-    
-    /* Progress ring circle styles */
-    .progress-ring__circle {
-        stroke-width: 8;
-        stroke-dasharray: 659.7; /* 2 * π * 105 */
-        stroke-dashoffset: 659.7;
     }
     
     .music-control-btn {
@@ -1633,13 +1622,6 @@ footer{
     .progress-ring {
         width: 150px;
         height: 150px;
-    }
-    
-    /* Progress ring circle styles */
-    .progress-ring__circle {
-        stroke-width: 5;
-        stroke-dasharray: 439.8; /* 2 * π * 70 */
-        stroke-dashoffset: 439.8;
     }
     
     .lightbox-prev, .lightbox-next {
