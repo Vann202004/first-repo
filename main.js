@@ -354,10 +354,22 @@ function initBackgroundMusic() {
     // Get the radius based on window size
     if (window.innerWidth <= 900) {
       radius = 70;
+      circle.setAttribute('r', radius);
+      circle.setAttribute('cx', 75);
+      circle.setAttribute('cy', 75);
+      circle.setAttribute('stroke-width', 5);
     } else if (window.innerWidth <= 1024) {
       radius = 155;
+      circle.setAttribute('r', radius);
+      circle.setAttribute('cx', 160);
+      circle.setAttribute('cy', 160);
+      circle.setAttribute('stroke-width', 12);
     } else {
       radius = 185;
+      circle.setAttribute('r', radius);
+      circle.setAttribute('cx', 190);
+      circle.setAttribute('cy', 190);
+      circle.setAttribute('stroke-width', 12);
     }
     
     circumference = 2 * Math.PI * radius;
