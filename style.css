@@ -582,11 +582,50 @@ body{
     opacity: 0.8;
 }
 
+/* Progress Ring - FIXED FOR RESPONSIVENESS */
+.circular-player {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    margin: 0 auto;
+}
+
+.progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.3s;
+    stroke-dasharray: 289.027; /* 2 * π * 46 */
+    stroke-dashoffset: 289.027; /* Initial state - full circle */
+}
+
+.image-container {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Play/Pause Button */
 .music-control-btn {
     position: absolute;
-    bottom: 40px;
-    right: 30px;
+    bottom: 30px;
+    right: 20px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -609,44 +648,6 @@ body{
 
 .music-control-btn i {
     font-size: 20px;
-}
-
-/* Progress Ring - UPDATED FOR RESPONSIVENESS */
-.circular-player {
-    position: relative;
-    width: 380px;
-    height: 380px;
-    margin: 0 auto;
-}
-
-.progress-ring {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-}
-
-.progress-ring__circle {
-    transition: stroke-dashoffset 0.3s;
-    /* Initial values will be set by JavaScript */
-}
-
-.image-container {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* ----- NAVIGATION BAR ----- */
@@ -1440,9 +1441,9 @@ footer{
         height: 320px;
     }
     
-    .progress-ring {
-        width: 320px;
-        height: 320px;
+    .music-control-btn {
+        width: 45px;
+        height: 45px;
     }
     
     .right-nav-controls {
@@ -1528,16 +1529,15 @@ footer{
         height: 220px;
     }
     
-    .progress-ring {
-        width: 220px;
-        height: 220px;
+    .progress-ring__circle {
+        stroke-width: 3.5;
     }
     
     .music-control-btn {
         width: 40px;
         height: 40px;
-        bottom: 5px;
-        right: 5px;
+        bottom: 10px;
+        right: 10px;
     }
     
     .music-control-btn i {
@@ -1615,13 +1615,23 @@ footer{
     }
     
     .circular-player {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
     }
     
-    .progress-ring {
-        width: 150px;
-        height: 150px;
+    .progress-ring__circle {
+        stroke-width: 3;
+    }
+    
+    .music-control-btn {
+        width: 35px;
+        height: 35px;
+        bottom: 5px;
+        right: 5px;
+    }
+    
+    .music-control-btn i {
+        font-size: 14px;
     }
     
     .lightbox-prev, .lightbox-next {
@@ -1662,6 +1672,27 @@ footer{
     
     .gallery-item {
         height: 400px;
+    }
+}
+
+/* Very small screens */
+@media only screen and (max-width: 375px) {
+    .circular-player {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-ring__circle {
+        stroke-width: 2.5;
+    }
+    
+    .music-control-btn {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .music-control-btn i {
+        font-size: 12px;
     }
 }
 
