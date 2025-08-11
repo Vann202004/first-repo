@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style2.css">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="images/favicon.PNG" type="image/x-icon">
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Vann Mars 24k | Portfolio Website</title>
+</head>
+<body>
+   <!-- Preloader -->
+   <div id="preloader">
+     <div class="loader-body">
+       <span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+       </span>
+       <div class="base">
+         <span></span>
+         <div class="face"></div>
+       </div>
+     </div>
+     <div class="longfazers">
+       <span></span>
+       <span></span>
+       <span></span>
+       <span></span>
+     </div>
+     <h1>Loading...</h1>
+   </div>
+
+   <!-- Video Background Section -->
+   <section class="video-background">
+       <video autoplay loop muted playsinline class="background-video">
+           <source src="videos/videocover.MP4" type="video/mp4">
+           Your browser does not support the video tag.
+       </video>
+       <div class="video-overlay"></div>
+       <div class="video-content">
+           <h1>Welcome to My Portfolio</h1>
+       </div>
+       <div class="scroll-down">
+           <a href="#home">
+               <i class="fa-solid fa-chevron-down"></i>
+           </a>
+       </div>
+   </section>
+   
+   <div class="container">
+    <!-- Music Header with Scrolling Text -->
+    <div class="music-header">
+        <div class="scrolling-text-container">
+            <div class="scrolling-text">Now Playing: <span id="now-playing-text">Loading music...</span></div>
+        </div>
+    </div>
+    <!-- Music Controls Bar -->
+    <div class="music-controls-bar">
+        <div class="music-controls">
+            <button id="prevBtn" class="control-btn"><i class="fa-solid fa-backward"></i></button>
+            <div class="track-info">
+                <span id="current-track-name">Select a track to play</span>
+                <span id="track-artist" class="track-artist"></span>
+            </div>
+            <button id="nextBtn" class="control-btn"><i class="fa-solid fa-forward"></i></button>
+        </div>
+        <audio id="audio" preload="auto" tabindex="0"></audio>
+    </div>
+
+    <!-- HEADER -->
+      <nav id="header">
+        <div class="nav-logo">
+            <p class="nav-name">@vmars24k</p>
+            <span>✞</span>
+        </div>
+        <div class="nav-menu" id="myNavMenu">
+            <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a href="#home" class="nav-link active-link">Home</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#about" class="nav-link">About</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <div class="circle"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="right-nav-controls">
+            <!-- Dark mode toggle switch -->
+            <div class="mode">
+                <div class="moon-sun" id="toggle-switch">
+                    <i class="fa-solid fa-moon" id="moon"></i>
+                    <i class="fa-solid fa-sun" id="sun"></i>
+                </div>
+            </div>
+            <div class="nav-button">
+                <a href="#gallery" class="btn">Explore Gallery Now <i class="fa-solid fa-images"></i></a>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="fa-solid fa-bars" onclick="myMenuFunction()"></i>
+            </div>
+        </div>
+      </nav>
+      <!-- Add nav spacer -->
+      <div class="nav-spacer" id="nav-spacer"></div>
+
+
+    <!-- MAIN -->
+    <main class="wrapper">
+       <!-- FEATURED BOX -->
+       <section class="featured-box" id="home">
+          <div class="featured-text">
+            <div class="featured-text-card">
+                <span>Vann Rich Ferrer</span>
+            </div>
+            <div class="featured-name">
+                <p>I'm <span class="typedText"></span></p>
+            </div>
+            <div class="featured-text-info">
+                <p>Vann Rich Ferrer is known for his Bruno Mars cosplayer, skilled photo editor, and coding. Creates stunning websites and enhances profile photos and images with advanced techniques.
+                </p>
+            </div>
+            <div class="featured-text-btn">
+                <a href="#contact" class="btn blue-btn">Contact Me</a>
+                <a href="#gallery" class="btn">Explore Gallery Now <i class="fa-solid fa-images"></i></a>
+            </div>
+            <div class="social_icons">
+                <div class="icon"><a href="https://www.instagram.com/vmars24k/"><i class="fa-brands fa-instagram"></i></a></div>
+                <div class="icon"><a href="https://www.facebook.com/vann.rich.3/"><i class="fa-brands fa-facebook"></i></a></div>
+                <div class="icon"><a href="https://www.youtube.com/@brunomars"><i class="fa-brands fa-youtube"></i></a></div>
+                <div class="icon"><a href="https://www.brunomars.com/"><i class="fa-solid fa-globe"></i></a></div>
+            </div>
+          </div>
+          <div class="featured-image">
+            <!-- Speech Bubble -->
+            <div class="speech-bubble">
+                <p>Click ▶ To
+                    Listen My Songs
+                </p>
+            </div>
+            <div class="circular-player">
+                <div class="image-container">
+                    <!-- Progress ring (SVG) -->
+                    <svg class="progress-ring" width="100%" height="100%" viewBox="0 0 120 120" aria-hidden="true">
+                        <!-- Track -->
+                        <circle class="progress-ring__track" cx="60" cy="60" r="54" />
+                        <!-- Progress -->
+                        <circle class="progress-ring__circle" cx="60" cy="60" r="54" />
+                    </svg>
+                    
+                    <!-- The avatar itself -->
+                    <button id="avatarBtn" 
+                            class="avatar-btn" 
+                            aria-label="Play" 
+                            aria-pressed="false" 
+                            aria-describedby="current-track-name"
+                            title="Play / Pause">
+                        <img src="images/profile.JPG" alt="avatar">
+                        <span class="center-icon" aria-hidden="true">▶</span>
+                    </button>
+                </div>
+                <button id="playPauseBtn" class="music-control-btn">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+            </div>
+            <div>
+                <div id="bio" class="responsive-bio">"I'm just a chill guy who likes being alone but never lonely."</div>
+            </div>
+          </div>
+          <div class="scroll-icon-box">
+            <a href="#about" class="scroll-btn">
+                <i class="fa-solid fa-mouse"></i>
+                <p>Scroll Down</p>
+            </a>
+          </div>
+
+       </section>
+       <!-- ABOUT BOX -->
+       <section class="section" id="about">
+          <div class="top-header">
+            <h2>About Me</h2>
+          </div>
+          <div class="row">
+            <div class="col">
+                <div class="about-info">
+                    <h3>Introduction</h3>
+                    <p>Hello, my name is Vann Rich Ferrer, and I am known for the one and only Bruno Mars Cosplay. I am well-versed in HTML, CSS,
+                       and JavaScript, and other cutting edge frameworks and libraries, which allows me to implement interactive features in my portfolio website.
+                       Additionally, I have experience creating customized and professional-looking profile photos for various platforms like
+                       social media or professional websites. I utilize tools to enhance, manipulate, and refine my photos,
+                       often with features like background removal, text overlays, and applying filters or effects. 
+                    </p>
+                    <div class="about-btn">
+                        <a href="#gallery" class="btn">Explore Gallery Now <i class="fa-solid fa-images"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3>Frontend</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3>Backend</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span>Python</span>
+                        <span>Django</span>
+                    </div>
+                </div>
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3>Database</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span>MySQL</span>
+                        <span>SQLite</span>
+                    </div>
+                </div>
+            </div>
+          </div>
+       </section>
+
+       <!-- PROJECT BOX -->
+       <section class="section" id="projects">
+          <div class="top-header">
+              <h2>Projects</h2>
+          </div>
+          <div class="project-container">
+            <div class="project-box">
+                <i class="fa-solid fa-briefcase"></i>
+                <h3>Completed</h3>
+                <label>14+ Finished Projects</label>
+                <label>20+ Photo Edits</label>
+                <label>3+ Cosplayed</label>
+            </div>
+            <div class="project-box">
+                <i class="fa-solid fa-crown"></i>
+                <h3>Bruno Mars Look-alike</h3>
+                <label>I'm Him</label>
+            </div>
+            <div class="project-box">
+                <i class="fa-solid fa-award"></i>
+                <h3>Experience</h3>
+                <label>2.6 Years in the IT field</label>
+            </div>
+          </div>
+       </section>
+
+       <!-- GALLERY SECTION -->
+       <section class="section" id="gallery">
+          <div class="top-header">
+              <h2>Gallery</h2>
+              <span>A showcase of my creative work and designs</span>
+          </div>
+          <div class="gallery-container">
+              <div class="gallery-item" data-img="images/image1.JPG">
+                  <img src="images/image1.JPG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>Bruno-San</h3>
+                      <p>Tokyo Disneyland</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image2.JPG">
+                  <img src="images/image2.JPG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>Is It Hot In Here Or Is It Just Me?</h3>
+                      <p>Solea Mactan Cebu Resort</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image3.jpg">
+                  <img src="images/image3.jpg" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>My Introversion Personality Trait</h3>
+                      <p>June Men's Health Month</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image4.JPG">
+                  <img src="images/image4.JPG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>Look At All Those Aquatic Animals</h3>
+                      <p>Cebu Ocean Park</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image5.PNG">
+                  <img src="images/image5.PNG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>1# Christmas Pool Day With The Gang</h3>
+                      <p>My True Friends</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image6.JPG">
+                  <img src="images/image6.JPG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>I Am Abosulute!</h3>
+                      <p>Seijuro Akashi Emperors's Third Eye</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image7.JPG">
+                  <img src="images/image7.JPG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>A Lazy Man</h3>
+                      <p>Year 12 Muck Up Day</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image8.JPG">
+                  <img src="images/image8.JPG" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>Just Me. My Peak Self.</h3>
+                      <p>A Sportperson Jack of All Trades</p>
+                  </div>
+              </div>
+              <div class="gallery-item" data-img="images/image9.jpg">
+                  <img src="images/image9.jpg" alt="Project Image">
+                  <div class="gallery-overlay">
+                      <h3>Bruno Mars Jersey</h3>
+                      <p>CSC Senior Jersey 2022</p>
+                  </div>
+              </div>
+              <div class="instagram-btn-container">
+                  <a href="https://www.instagram.com/vmars24k/" class="btn instagram-btn">See More on Instagram ⮕</a>
+              </div>
+          </div>
+       </section>
+       
+       <!-- CONTACT BOX -->
+       <section class="section" id="contact">
+          <div class="top-header">
+            <h2>Get in touch</h2>
+            <span>*Please note that using the message box form won't send email. For this to work, I need to implement PHP language which I haven't learned that yet.</span>
+          </div>
+          <div class="row">
+             <div class="col">
+                <div class="contact-info">
+                    <h2>Find Me <i class="fa-solid fa-arrow-turn-down"></i></h2>
+                    <p><i class="fa-solid fa-envelope"></i> Email: vannferrer2004@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i> Tel: +610432515005</p>
+                </div>
+             </div>
+             <div class="col">
+                <div class="form-control">
+                    <div class="form-inputs">
+                        <input type="text" class="input-field" placeholder="Name">
+                        <input type="text" class="input-field" placeholder="Email">
+                    </div>
+                    <div class="text-area">
+                        <textarea placeholder="Message"></textarea>
+                    </div>
+                    <div class="form-button">
+                        <button class="btn">Send <i class="fa-solid fa-message"></i></button>
+                    </div>
+                </div>
+             </div>
+          </div>
+       </section>
+
+    </main>
+
+    <!-- Lightbox Container -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="images/placeholder.jpg" alt="Fullscreen Image">
+            <div class="lightbox-caption">
+                <h3 id="lightbox-title">Image Title</h3>
+                <p id="lightbox-desc"></p>
+            </div>
+        </div>
+        <span class="lightbox-prev">&lsaquo;</span>
+        <span class="lightbox-next">&rsaquo;</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="top-footer">
+            <p>Vann Rich Ferrer</p>
+        </div>
+        <div class="middle-footer">
+            <ul class="footer-menu">
+                <li class="footer_menu_list">
+                    <a href="#home">Home</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#about">About</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#projects">Projects</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#gallery">Gallery</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-social-icons">
+            <div class="icon"><a href="https://www.instagram.com/vmars24k/"><i class="fa-brands fa-instagram"></i></a></div>
+            <div class="icon"><a href="https://www.facebook.com/vann.rich.3/"><i class="fa-brands fa-facebook"></i></a></div>
+            <div class="icon"><a href="https://www.youtube.com/@brunomars"><i class="fa-brands fa-youtube"></i></a></div>
+            <div class="icon"><a href="https://www.brunomars.com/"><i class="fa-solid fa-globe"></i></a></div>
+        </div>
+        <div class="bottom-footer">
+            <p> &copy; 2025 <a href="#home" style="text-decoration: none;">Vann Mars 24k.</a> All rights reserved.</p>
+        </div>
+    </footer>
+
+    </div>
+
+    <!-- Background Music -->
+    <div id="music-sources" style="display: none;">
+        <audio data-title="Die With A Smile" data-artist="Lady Gaga, Bruno Mars">
+            <source src="audio/lady-gaga-die-with-a-smile.mp3" type="audio/mp3">
+        </audio>
+        <audio data-title="When I Was Your Man" data-artist="Bruno Mars">
+            <source src="audio/bruno-mars-when-i-was-your-man.mp3" type="audio/mp3">
+        </audio>
+        <audio data-title="Just The Way You Are" data-artist="Bruno Mars">
+            <source src="audio/bruno-mars-just-the-way-you-are.mp3" type="audio/mp3">
+        </audio>
+        <audio data-title="That's What I Like" data-artist="Bruno Mars">
+            <source src="audio/bruno-mars-thats-what-i-like.mp3" type="audio/mp3">
+        </audio>
+        <audio data-title="24K Magic" data-artist="Bruno Mars">
+            <source src="audio/bruno-mars-24k-magic.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Scroll to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- TYPING JS Link -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <!-- SCROLL REVEAL JS Link -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- MAIN JS -->
+    <script src="style2.css"></script>
+</body>
+</html>
