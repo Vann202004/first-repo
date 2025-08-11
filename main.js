@@ -312,156 +312,238 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Setup Progress Ring with SVG viewBox approach
 function setupProgressRing() {
-  const circle = document.querySelector('.progress-ring__circle');
-  if (!circle) return;
-  
-  // Get radius and calculate circumference (using viewBox coordinates)
-  const radius = parseFloat(circle.getAttribute('r'));
-  const circumference = 2 * Math.PI * radius;
-  
-  // Set initial stroke properties
-  circle.style.strokeDasharray = `${circumference} ${circumference}`;
-  circle.style.strokeDashoffset = circumference; // Start with full offset (no progress)
+    const circle = document.querySelector('.progress-ring__circle');
+    if (!circle) return;
+    
+    // Get radius and calculate circumference (using viewBox coordinates)
+    const radius = parseFloat(circle.getAttribute('r'));
+    const circumference = 2 * Math.PI * radius;
+    
+    // Set initial stroke properties
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = circumference; // Start with full offset (no progress)
 }
 
 // Background Music Functionality
 function initBackgroundMusic() {
-  const audio = document.getElementById('audio');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const nowPlayingText = document.getElementById('now-playing-text');
-  const currentTrackName = document.getElementById('current-track-name');
-  const trackArtistElement = document.getElementById('track-artist');
+    const audio = document.getElementById('audio');
+    const avatarBtn = document.getElementById('avatarBtn');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const nowPlayingText = document.getElementById('now-playing-text');
+    const currentTrackName = document.getElementById('current-track-name');
+    const trackArtistElement = document.getElementById('track-artist');
+    const progressCircle = document.querySelector('.progress-ring__circle');
 
-  // Get all audio sources
-  let musicSources = Array.from(document.querySelectorAll('#music-sources audio'));
-  let current = 0;
-  let isPlaying = false;
+    // Get all audio sources
+    let musicSources = Array.from(document.querySelectorAll('#music-sources audio'));
+    let current = 0;
+    let isPlaying = false;
 
-  // Shuffle the music array when page loads
-  shuffleArray(musicSources);
-
-  // Shuffle array function
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  // Initialize
-  function initPlayer() {
-    audio.volume = 0.4;
-    loadTrack(current);
-    
-    audio.addEventListener('ended', function() {
-      nextTrack();
-    });
-    
-    audio.addEventListener('timeupdate', updateProgress);
-  }
-
-  // Update progress ring - FIXED FOR RESPONSIVENESS
-  function updateProgress() {
-    const circle = document.querySelector('.progress-ring__circle');
-    if (!circle || !audio.duration) return;
-    
-    // Get radius from SVG viewBox coordinate system (not physical pixels)
-    const radius = parseFloat(circle.getAttribute('r'));
+    // Get radius and calculate circumference for the progress ring
+    const radius = parseFloat(progressCircle.getAttribute('r'));
     const circumference = 2 * Math.PI * radius;
-    
-    // Calculate current progress percentage
-    const percent = audio.currentTime / audio.duration;
-    const offset = circumference - (percent * circumference);
-    
-    // Update the stroke dashoffset
-    circle.style.strokeDashoffset = offset;
-  }
 
-  // Function to load and play a track
-  function loadTrack(index) {
-    const currentAudio = musicSources[index];
-    const sourceElement = currentAudio.querySelector('source');
-    
-    // Get track metadata
-    const title = currentAudio.getAttribute('data-title') || 'Unknown Title';
-    const artist = currentAudio.getAttribute('data-artist') || 'Unknown Artist';
-    
-    // Set the source for the main audio element
-    audio.src = sourceElement.src;
-    audio.load();
-    
-    updateNowPlaying(title, artist);
-    
-    // Play if was previously playing
-    if (isPlaying) {
-      playTrack();
+    // Set initial stroke properties
+    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressCircle.style.strokeDashoffset = circumference;
+
+    // Shuffle the music array when page loads
+    shuffleArray(musicSources);
+
+    // Shuffle array function
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
-  }
 
-  // Play current track
-  function playTrack() {
-    audio.play()
-      .then(() => {
-        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        isPlaying = true;
-      })
-      .catch(error => {
-        console.error("Error playing audio:", error);
+    // Initialize
+    function initPlayer() {
+        audio.volume = 0.4;
+        loadTrack(current);
+        
+        audio.addEventListener('ended', function() {
+            nextTrack();
+        });
+        
+        audio.addEventListener('timeupdate', updateProgress);
+    }
+
+    // Update progress ring
+    function updateProgress() {
+        if (!audio.duration) return;
+        
+        // Calculate current progress percentage
+        const percent = audio.currentTime / audio.duration;
+        const offset = circumference - (percent * circumference);
+        
+        // Update the stroke dashoffset
+        progressCircle.style.strokeDashoffset = offset;
+    }
+
+    // Function to load and play a track
+    function loadTrack(index) {
+        const currentAudio = musicSources[index];
+        const sourceElement = currentAudio.querySelector('source');
+        
+        // Get track metadata
+        const title = currentAudio.getAttribute('data-title') || 'Unknown Title';
+        const artist = currentAudio.getAttribute('data-artist') || 'Unknown Artist';
+        
+        // Set the source for the main audio element
+        audio.src = sourceElement.src;
+        audio.load();
+        
+        updateNowPlaying(title, artist);
+        
+        // Reset progress
+        progressCircle.style.strokeDashoffset = circumference;
+        
+        // Play if was previously playing
+        if (isPlaying) {
+            playTrack();
+        }
+    }
+
+    // Play current track
+    function playTrack() {
+        audio.play()
+            .then(() => {
+                avatarBtn.innerHTML = '<img src="images/profile.JPG" alt="avatar"><span class="center-icon">⏸</span>';
+                avatarBtn.setAttribute('aria-pressed', 'true');
+                avatarBtn.setAttribute('aria-label', 'Pause');
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                isPlaying = true;
+            })
+            .catch(error => {
+                console.error("Error playing audio:", error);
+                avatarBtn.innerHTML = '<img src="images/profile.JPG" alt="avatar"><span class="center-icon">▶</span>';
+                avatarBtn.setAttribute('aria-pressed', 'false');
+                avatarBtn.setAttribute('aria-label', 'Play');
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                isPlaying = false;
+            });
+    }
+
+    // Pause current track
+    function pauseTrack() {
+        audio.pause();
+        avatarBtn.innerHTML = '<img src="images/profile.JPG" alt="avatar"><span class="center-icon">▶</span>';
+        avatarBtn.setAttribute('aria-pressed', 'false');
+        avatarBtn.setAttribute('aria-label', 'Play');
         playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
         isPlaying = false;
-      });
-  }
-
-  // Pause current track
-  function pauseTrack() {
-    audio.pause();
-    playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-    isPlaying = false;
-  }
-
-  // Toggle play/pause
-  function togglePlayPause() {
-    if (audio.paused) {
-      playTrack();
-    } else {
-      pauseTrack();
     }
-  }
 
-  // Go to previous track
-  function prevTrack() {
-    current = (current - 1 + musicSources.length) % musicSources.length;
-    loadTrack(current);
-  }
+    // Toggle play/pause
+    function togglePlayPause() {
+        if (audio.paused) {
+            playTrack();
+        } else {
+            pauseTrack();
+        }
+    }
 
-  // Go to next track
-  function nextTrack() {
-    current = (current + 1) % musicSources.length;
-    loadTrack(current);
-  }
+    // Go to previous track
+    function prevTrack() {
+        current = (current - 1 + musicSources.length) % musicSources.length;
+        loadTrack(current);
+    }
 
-  // Update now playing text with title and artist
-  function updateNowPlaying(title, artist) {
-    if (nowPlayingText) nowPlayingText.textContent = `${title} - ${artist}`;
-    if (currentTrackName) currentTrackName.textContent = title;
-    if (trackArtistElement) trackArtistElement.textContent = artist;
-  }
+    // Go to next track
+    function nextTrack() {
+        current = (current + 1) % musicSources.length;
+        loadTrack(current);
+    }
 
-  // Event listeners
-  playPauseBtn.addEventListener('click', togglePlayPause);
-  prevBtn.addEventListener('click', prevTrack);
-  nextBtn.addEventListener('click', nextTrack);
-  
-  // Initialize the player
-  initPlayer();
+    // Update now playing text with title and artist
+    function updateNowPlaying(title, artist) {
+        if (nowPlayingText) nowPlayingText.textContent = `${title} - ${artist}`;
+        if (currentTrackName) currentTrackName.textContent = title;
+        if (trackArtistElement) trackArtistElement.textContent = artist;
+    }
 
-  // Handle window resize to update progress ring
-  window.addEventListener('resize', function() {
-    updateProgress();
-  });
+    // Seeking functionality
+    let seeking = false;
+
+    function getPointerPercentOnRing(evt) {
+        const ring = document.querySelector('.progress-ring');
+        // Get pointer position relative to center of the SVG
+        const rect = ring.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const x = (evt.touches?.[0]?.clientX ?? evt.clientX) - cx;
+        const y = (evt.touches?.[0]?.clientY ?? evt.clientY) - cy;
+
+        // Angle from -PI..PI (0 at right). Convert so 0 is at top, clockwise positive.
+        let angle = Math.atan2(y, x); // radians
+        angle = angle + Math.PI / 2;  // rotate so 0 at top
+        if (angle < 0) angle += Math.PI * 2;
+        const percent = angle / (Math.PI * 2); // 0..1 clockwise
+
+        // Optionally ignore taps far outside the ring
+        const dist = Math.hypot(x, y);
+        const outer = rect.width / 2;
+        const inner = outer * 0.6; // Skip if click is too close to center
+        if (dist < inner || dist > outer + 20) {
+            return null;
+        }
+        return percent;
+    }
+
+    function seekToPercent(p) {
+        if (!audio.duration) return;
+        p = Math.max(0, Math.min(p, 1));
+        audio.currentTime = p * audio.duration;
+        updateProgress();
+    }
+
+    function pointerDown(evt) {
+        if (!evt.target.closest('.circular-player')) return;
+        seeking = true;
+        const p = getPointerPercentOnRing(evt);
+        if (p != null) {
+            seekToPercent(p);
+        } else {
+            // Inside avatar center: treat as simple toggle
+            togglePlayPause();
+        }
+    }
+
+    function pointerMove(evt) {
+        if (!seeking) return;
+        const p = getPointerPercentOnRing(evt);
+        if (p != null) seekToPercent(p);
+    }
+
+    function pointerUp() {
+        seeking = false;
+    }
+
+    // Event listeners
+    avatarBtn.addEventListener('click', togglePlayPause);
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    prevBtn.addEventListener('click', prevTrack);
+    nextBtn.addEventListener('click', nextTrack);
+    
+    document.addEventListener('mousedown', pointerDown);
+    document.addEventListener('touchstart', pointerDown, { passive: true });
+    document.addEventListener('mousemove', pointerMove);
+    document.addEventListener('touchmove', pointerMove, { passive: true });
+    document.addEventListener('mouseup', pointerUp);
+    document.addEventListener('touchend', pointerUp);
+    
+    // Pause when tab is hidden, resume intention respected
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && isPlaying) pauseTrack();
+    });
+    
+    // Initialize the player
+    initPlayer();
 }
 
 // Speech Bubble Animation
